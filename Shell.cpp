@@ -2,6 +2,7 @@
 #include<string>
 #include<string.h>
 #include<cstdlib>
+#include<stdlib.h>
 
 
 using namespace std ;
@@ -23,7 +24,7 @@ class Shell
     {
         while(1)
         {
-            cout << "\033[1;31m >>> \033[0m";
+            cout << "\033[1;31m >>> \033[0m"; 
             getline( cin , this->User_Input ) ;
             Tokenize() ;
             system(this->User_Input.c_str()) ;
@@ -46,8 +47,7 @@ class Shell
 
     void Tokenize()
     {
-        int x = Total_Words() ;
-        this->Argument_List = new string[ x * 20 ] ;
+        this->Argument_List = new string[ Total_Words() * 20 ] ;
         for( int i = 0 , j = 0 ; i < this->User_Input.length() ; ++i )
         {
             if( this->User_Input[i] == ' ' )
@@ -61,7 +61,6 @@ class Shell
         {
             cout<<this->Argument_List[i]<<endl ;
         }
-        cin.get() ;
     }
 } ;
 
