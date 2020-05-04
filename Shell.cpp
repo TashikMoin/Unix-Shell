@@ -18,10 +18,6 @@ class Shell
     {
         this->User_Input = "" ;
         this->Argument_List = NULL ;
-    }
-
-    void Load_Shell()
-    {
         while(1)
         {
             cout << "\033[1;31m >>> \033[0m"; 
@@ -30,6 +26,7 @@ class Shell
             system(this->User_Input.c_str()) ;
         }
     }
+
 
     int Total_Words( )
     {
@@ -69,5 +66,4 @@ class Shell
 int main() 
 {
     Shell *My_Shell = new Shell() ;
-    My_Shell->Load_Shell() ;
 }
