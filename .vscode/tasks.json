@@ -11,10 +11,8 @@
         "${fileBasenameNoExtension}",
         "${fileBasenameNoExtension}.cpp"
       ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      "group": "build",
+      "problemMatcher": []
     },
     {
       "label": "Build and Debug c",
@@ -25,6 +23,27 @@
         "-o",
         "${fileBasenameNoExtension}",
         "${fileBasenameNoExtension}.c"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "C/C++: g++-7 build active file",
+      "command": "/usr/bin/g++-7",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "problemMatcher": [
+        "$gcc"
       ],
       "group": {
         "kind": "build",

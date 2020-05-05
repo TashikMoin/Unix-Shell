@@ -14,8 +14,9 @@ class Shell
         string *Argument_List ;
     public :
 
-    Shell()
+    Shell( )
     {
+        
         this->User_Input = "" ;
         this->Argument_List = NULL ;
         while(1)
@@ -23,12 +24,37 @@ class Shell
             cout << "\033[1;31m >>> \033[0m"; 
             getline( cin , this->User_Input ) ;
             Tokenize() ;
-            system(this->User_Input.c_str()) ;
+            if( Search_If_A_Arithmetic_Expression() )
+            {
+                string Arithmetic_Expression = "python3 Arithmetic.py " ;
+                Arithmetic_Expression += '"' ;
+                for( int i = 0 ; i < Total_Arg() ; ++i )
+                {
+                    Arithmetic_Expression += this->Argument_List[i] ;
+                    Arithmetic_Expression += " " ;
+                }
+                Arithmetic_Expression += '"' ;
+                system( Arithmetic_Expression.c_str() ) ;
+                continue ;
+            }
+            system( this->User_Input.c_str() ) ;
         }
     }
 
+    bool Search_If_A_Arithmetic_Expression()
+    {
+        for( int i = 0 ; i < this->User_Input.length() ; ++i )
+        {
+            if( this->User_Input[i] == '+' || this->User_Input[i] == '-' || this->User_Input[i] == '*' || this->User_Input[i] == '/')
+            {
+                return true ;
+            }  
+        }      
+        return false ;
+    }
 
-    int Total_Words( )
+
+    int Total_Arg( )
     {
         int i = 0 , Count = 1 ;
         while( i < this->User_Input.length() )
@@ -44,7 +70,7 @@ class Shell
 
     void Tokenize()
     {
-        this->Argument_List = new string[ Total_Words() * 20 ] ;
+        this->Argument_List = new string[ Total_Arg() ] ;
         for( int i = 0 , j = 0 ; i < this->User_Input.length() ; ++i )
         {
             if( this->User_Input[i] == ' ' )
@@ -53,17 +79,12 @@ class Shell
             }
             this->Argument_List[j] += this->User_Input[i] ;
         }
-
-        for( int i = 0 ; i < this->Total_Words() ; ++i )
-        {
-            cout<<this->Argument_List[i]<<endl ;
-        }
     }
 } ;
 
 
 
-int main() 
+int main( int argc, char *argv[] ) 
 {
-    Shell *My_Shell = new Shell() ;
+    Shell *My_Shell = new Shell( ) ;
 }
