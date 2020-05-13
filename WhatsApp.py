@@ -2,10 +2,11 @@ from selenium import webdriver
 import sys
 browser = webdriver.Chrome()
 browser.get('https://web.whatsapp.com/') 
-Contact_Name = sys.argv[1]
+Contact_Name = sys.argv[1].strip('"')
 print(Contact_Name) 
 Message = sys.argv[2]
-print("Press Any Key To Send Message...")
+print(Message)
+input("Press Any Key To Send Message...")
 print("Sending Your Message...")
 print("Sending Your Message...")
 print("Sending Your Message...")

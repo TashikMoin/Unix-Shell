@@ -3,6 +3,7 @@
 #include<string.h>
 #include<cstdlib>
 #include<stdlib.h>
+#include<algorithm>
 
 
 using namespace std ;
@@ -34,24 +35,29 @@ class Shell
             if( this->Argument_List[0] == "WhatsApp-Message")
             {
                 string WhatsApp = "python3 WhatsApp.py " ;
-                int i = this->Argument_List[0].length() , j = 1 , Length ;
+                int i = this->Argument_List[0].length() + 1 , j = 1 , Length = 0 , Args = 0 ;
                 while( i < this->User_Input.length() )
                 {
-                    Length = 0 ;
-                    this->Argument_List[j][0] = '"' ;
-                    while( this->User_Input[i] != '"' )
+                    this->Argument_List[j] = "" ;
+                    Length = 0 ; Args = 0 ;
+                    while( Length < 2 && i < this->User_Input.length() )
                     {
-                        this->Argument_List[j][Length+1] += this->User_Input[i] ;
+                        if( this->User_Input[i] == '"' )
+                        {
+                            ++Length ;
+                        }
+                        if( this->User_Input[i] == ' ')
+                        {
+                            ++Args ;
+                        }
+                        this->Argument_List[j] += this->User_Input[i] ;
                         ++i ;
-                        ++Length ;
                     }
-                    this->Argument_List[j][Length] = '"' ;
                     WhatsApp += this->Argument_List[j] ;
-                    WhatsApp += " " ;
-                    ++j ; ++i ;
+                    j += Args ;
+                    j++ ;
                 }
                 cout<<WhatsApp<<endl ;
-                cin.get() ;
                 system( WhatsApp.c_str() ) ;
                 continue ;
             }
