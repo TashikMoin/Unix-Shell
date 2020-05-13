@@ -24,6 +24,25 @@ class Shell
             cout << "\033[1;31m >>> \033[0m"; 
             getline( cin , this->User_Input ) ;
             Tokenize() ;
+            if( this->Argument_List[0] == "Youtube-Playlist" )
+            {
+                string YoutubeDL = "youtube-dl " ;
+                YoutubeDL += this->Argument_List[1] ;
+                system( YoutubeDL.c_str() ) ;
+                continue ;
+            }
+            if( this->Argument_List[0] == "WhatsApp-Message")
+            {
+                string WhatsApp = "python3 WhatsApp.py " ;
+                for( int i = 1 ; i < Total_Arg() ; ++i )
+                {
+                    WhatsApp += this->Argument_List[i] ;
+                    WhatsApp += " " ;
+                }
+                cout<<WhatsApp<<endl ;
+                system( WhatsApp.c_str() ) ;
+                continue ;
+            }
             if( Search_If_A_Arithmetic_Expression() )
             {
                 string Arithmetic_Expression = "python3 Arithmetic.py " ;
