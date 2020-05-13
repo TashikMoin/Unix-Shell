@@ -3,6 +3,7 @@ import sys
 browser = webdriver.Chrome()
 browser.get('https://web.whatsapp.com/') 
 Contact_Name = sys.argv[1]
+print(Contact_Name) 
 Message = sys.argv[2]
 print("Press Any Key To Send Message...")
 print("Sending Your Message...")

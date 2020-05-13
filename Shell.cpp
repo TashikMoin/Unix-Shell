@@ -34,12 +34,24 @@ class Shell
             if( this->Argument_List[0] == "WhatsApp-Message")
             {
                 string WhatsApp = "python3 WhatsApp.py " ;
-                for( int i = 1 ; i < Total_Arg() ; ++i )
+                int i = this->Argument_List[0].length() , j = 1 , Length ;
+                while( i < this->User_Input.length() )
                 {
-                    WhatsApp += this->Argument_List[i] ;
+                    Length = 0 ;
+                    this->Argument_List[j][0] = '"' ;
+                    while( this->User_Input[i] != '"' )
+                    {
+                        this->Argument_List[j][Length+1] += this->User_Input[i] ;
+                        ++i ;
+                        ++Length ;
+                    }
+                    this->Argument_List[j][Length] = '"' ;
+                    WhatsApp += this->Argument_List[j] ;
                     WhatsApp += " " ;
+                    ++j ; ++i ;
                 }
                 cout<<WhatsApp<<endl ;
+                cin.get() ;
                 system( WhatsApp.c_str() ) ;
                 continue ;
             }
