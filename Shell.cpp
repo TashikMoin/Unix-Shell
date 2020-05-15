@@ -5,10 +5,10 @@
 #include<stdlib.h>
 #ifdef WINDOWS
 #include <direct.h>
-#define GetCurrentDir _getcwd
+#define Pwd _getcwd
 #else
 #include <unistd.h>
-#define GetCurrentDir getcwd
+#define Pwd getcwd
 #endif
 
 using namespace std ;
@@ -92,7 +92,7 @@ class Shell
     string Present_Working_Directory() 
     {
         char buff[FILENAME_MAX]; 
-        GetCurrentDir( buff, FILENAME_MAX );
+        Pwd( buff, FILENAME_MAX );
         string Present_Working_Directory(buff);
         return Present_Working_Directory;
     }
