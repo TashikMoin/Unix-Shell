@@ -3,8 +3,13 @@
 #include<string.h>
 #include<cstdlib>
 #include<stdlib.h>
-#include<algorithm>
-
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
 
 using namespace std ;
 
@@ -13,16 +18,17 @@ class Shell
     private :
         string User_Input ;
         string *Argument_List ;
+        int Total_Arguments ;
     public :
 
     Shell( )
     {
-        
+        this->Total_Arguments = 0 ;
         this->User_Input = "" ;
         this->Argument_List = NULL ;
         while(1)
         {
-            cout << "\033[1;31m >>> \033[0m"; 
+            cout<<Present_Working_Directory()<< "\033[1;31m  >>> \033[0m"; 
             getline( cin , this->User_Input ) ;
             Tokenize() ;
             if( this->Argument_List[0] == "Youtube-Playlist" )
@@ -61,6 +67,11 @@ class Shell
                 system( WhatsApp.c_str() ) ;
                 continue ;
             }
+            if( this->Argument_List[0] == "cd" )
+            {   
+                chdir( this->Argument_List[1].c_str() );
+                continue ;
+            }
             if( Search_If_A_Arithmetic_Expression() )
             {
                 string Arithmetic_Expression = "python3 Arithmetic.py " ;
@@ -76,6 +87,14 @@ class Shell
             }
             system( this->User_Input.c_str() ) ;
         }
+    }
+
+    string Present_Working_Directory() 
+    {
+        char buff[FILENAME_MAX]; 
+        GetCurrentDir( buff, FILENAME_MAX );
+        string Present_Working_Directory(buff);
+        return Present_Working_Directory;
     }
 
     bool Search_If_A_Arithmetic_Expression()
@@ -102,6 +121,7 @@ class Shell
             }
             i++ ;
         }
+        this->Total_Arguments = Count ;
         return Count ;
     }
 
