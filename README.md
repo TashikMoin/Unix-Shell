@@ -1,8 +1,8 @@
 # Unix Shell
-- This Shell Is For Only Linux Users
-- Windows Users Can Also Use But Some Commands May Not Work
+- This shell is for only Linux users
+- Windows users can also use but some commands may not work
 - The project has following dependencies,
-   Selenium, python3 ( For Performing Arithmetic & To Run Different Scripts ), Chrome & Firefox WebDrivers (geckodriver),and  youtube-dl .
+   Selenium, python3 ( for performing arithmetic & to run different custom command scripts ), chrome & firefox web drivers (geckodriver), and  youtube-dl module.
    
    
 # It has following features,
